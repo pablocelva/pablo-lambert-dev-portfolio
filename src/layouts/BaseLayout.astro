@@ -1,0 +1,97 @@
+---
+import Seo from '@/components/common/Seo.astro';
+import Navbar from '@/components/layout/Navbar.astro';
+import Footer from '@/components/layout/Footer.astro';
+import RecruiterBar from '@/components/layout/RecruiterBar.astro';
+import RecruiterDrawer from '@/components/sections/RecruiterDrawer';
+import '@/styles/tokens.css';
+import '@/styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article' | 'profile';
+  publishedTime?: string;
+  modifiedTime?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  image,
+  type = 'website',
+  publishedTime,
+  modifiedTime,
+  noindex = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <Seo
+      title={title}
+      description={description}
+      image={image}
+      type={type}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
+      noindex={noindex}
+    />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+    
+    <div class="layout-container">
+      <RecruiterBar />
+      <Navbar />
+      
+      <main id="main-content" class="main-content">
+        <slot />
+      </main>
+
+      <Footer />
+      
+      <!-- Interactive Recruiter Quick Drawer Island -->
+      <RecruiterDrawer client:idle />
+    </div>
+
+    <style>
+      .skip-link {
+        position: absolute;
+        top: -100px;
+        left: var(--space-4);
+        background: var(--color-primary);
+        color: white;
+        padding: var(--space-2) var(--space-4);
+        border-radius: var(--radius-md);
+        font-weight: 600;
+        z-index: 1000;
+        transition: top var(--transition-fast);
+      }
+      .skip-link:focus {
+        top: var(--space-4);
+      }
+      .layout-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .main-content {
+        flex: 1;
+        width: 100%;
+      }
+    </style>
+  </body>
+</html>

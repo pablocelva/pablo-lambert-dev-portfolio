@@ -1,0 +1,36 @@
+.header {
+  margin-bottom: 3.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.align-center {
+  text-align: center;
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left;
+  max-width: 800px;
+}
+
+.badgeWrapper {
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  color: var(--text-muted);
+  line-height: 1.6;
+}

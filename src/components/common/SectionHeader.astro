@@ -1,0 +1,40 @@
+---
+import Badge from './Badge.astro';
+import styles from './SectionHeader.module.css';
+
+interface Props {
+  badgeText?: string;
+  badgeVariant?: 'default' | 'primary' | 'ai' | 'data' | 'ux';
+  title: string;
+  subtitle?: string;
+  align?: 'left' | 'center';
+  class?: string;
+}
+
+const {
+  badgeText,
+  badgeVariant = 'primary',
+  title,
+  subtitle,
+  align = 'center',
+  class: className = ''
+} = Astro.props;
+
+const headerClasses = [
+  styles.header,
+  styles[`align-${align}`],
+  className
+].filter(Boolean).join(' ');
+---
+
+<div class={headerClasses}>
+  {badgeText && (
+    <div class={styles.badgeWrapper}>
+      <Badge variant={badgeVariant} size="sm">
+        {badgeText}
+      </Badge>
+    </div>
+  )}
+  <h2 class={styles.title}>{title}</h2>
+  {subtitle && <p class={styles.subtitle}>{subtitle}</p>}
+</div>

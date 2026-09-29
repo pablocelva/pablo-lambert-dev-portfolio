@@ -1,0 +1,137 @@
+---
+import { siteConfig } from '../../data/siteConfig';
+import { initialProfile } from '../../data/initialData';
+import Button from '../common/Button.astro';
+import styles from './Navbar.module.css';
+---
+
+<header class={styles.header} id="main-header">
+  <div class={`container ${styles.navContainer}`}>
+    <a href="#" class={styles.brand} aria-label="Pablo Lambert - Inicio">
+      <div class={styles.brandLogo}>PL</div>
+      <div class={styles.brandInfo}>
+        <span class={styles.brandName}>Pablo Lambert</span>
+        <span class={styles.brandRole}>Full Stack & AI Engineer</span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class={styles.desktopNav} aria-label="Navegación principal">
+      <ul class={styles.navList}>
+        {siteConfig.navLinks.map((link) => (
+          <li>
+            <a href={link.href} class={styles.navLink}>
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class={styles.actions}>
+      <Button
+        variant="outline"
+        size="sm"
+        href={initialProfile.cvUrl}
+        target="_blank"
+        download="CV-Pablo-Lambert-FullStack-AI.pdf"
+        class={styles.cvBtn}
+      >
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <span>Descargar CV</span>
+      </Button>
+
+      <Button
+        variant="primary"
+        size="sm"
+        href="#contacto"
+        class={styles.contactBtn}
+      >
+        Hablemos
+      </Button>
+
+      <!-- Mobile Menu Toggle Button -->
+      <button
+        type="button"
+        class={styles.mobileMenuToggle}
+        id="mobile-menu-btn"
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg class={styles.menuIcon} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Menu -->
+  <div class={styles.mobileMenu} id="mobile-menu" hidden>
+    <div class={styles.mobileMenuContent}>
+      <nav aria-label="Navegación móvil">
+        <ul class={styles.mobileNavList}>
+          {siteConfig.navLinks.map((link) => (
+            <li>
+              <a href={link.href} class={styles.mobileNavLink}>
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <div class={styles.mobileActions}>
+        <Button
+          variant="outline"
+          size="md"
+          href={initialProfile.cvUrl}
+          target="_blank"
+          download="CV-Pablo-Lambert-FullStack-AI.pdf"
+        >
+          Descargar CV
+        </Button>
+        <Button
+          variant="primary"
+          size="md"
+          href="#contacto"
+        >
+          Hablemos
+        </Button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileLinks = document.querySelectorAll(`.${styles.mobileNavLink}`);
+
+  function toggleMenu() {
+    const isExpanded = mobileBtn?.getAttribute('aria-expanded') === 'true';
+    mobileBtn?.setAttribute('aria-expanded', String(!isExpanded));
+    if (mobileMenu) {
+      if (isExpanded) {
+        mobileMenu.setAttribute('hidden', '');
+      } else {
+        mobileMenu.removeAttribute('hidden');
+      }
+    }
+  }
+
+  mobileBtn?.addEventListener('click', toggleMenu);
+
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileBtn?.setAttribute('aria-expanded', 'false');
+      mobileMenu?.setAttribute('hidden', '');
+    });
+  });
+</script>

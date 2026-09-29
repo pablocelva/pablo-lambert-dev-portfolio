@@ -1,0 +1,84 @@
+---
+import { siteConfig } from '../../data/siteConfig';
+import { initialProfile } from '../../data/initialData';
+import styles from './Footer.module.css';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class={styles.footer}>
+  <div class={`container ${styles.footerContainer}`}>
+    <div class={styles.top}>
+      <div class={styles.brandColumn}>
+        <div class={styles.brand}>
+          <div class={styles.brandLogo}>PL</div>
+          <span class={styles.brandName}>Pablo Lambert</span>
+        </div>
+        <p class={styles.tagline}>
+          Full Stack Developer especializado en aplicaciones web de alto rendimiento, IA generativa, Data Science y diseño UX accesible.
+        </p>
+        <div class={styles.statusBadge}>
+          <span class={styles.statusDot}></span>
+          <span>Disponible para nuevas oportunidades</span>
+        </div>
+      </div>
+
+      <div class={styles.linksColumn}>
+        <h3 class={styles.columnTitle}>Navegación</h3>
+        <ul class={styles.linkList}>
+          {siteConfig.navLinks.map((link) => (
+            <li>
+              <a href={link.href} class={styles.footerLink}>
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class={styles.linksColumn}>
+        <h3 class={styles.columnTitle}>Redes & Contacto</h3>
+        <ul class={styles.linkList}>
+          <li>
+            <a href={initialProfile.github} target="_blank" rel="noopener noreferrer" class={styles.footerLink}>
+              GitHub (@pablolambert-dev)
+            </a>
+          </li>
+          <li>
+            <a href={initialProfile.linkedin} target="_blank" rel="noopener noreferrer" class={styles.footerLink}>
+              LinkedIn
+            </a>
+          </li>
+          <li>
+            <a href={`mailto:${initialProfile.email}`} class={styles.footerLink}>
+              {initialProfile.email}
+            </a>
+          </li>
+          <li>
+            <a href="/admin" class={styles.adminLink}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                <path d="M7 7h10"></path>
+                <path d="M7 12h10"></path>
+                <path d="M7 17h10"></path>
+              </svg>
+              <span>Acceso Admin / CMS</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class={styles.bottom}>
+      <p class={styles.copyright}>
+        © {currentYear} Pablo Lambert. Desarrollado con Astro, TypeScript, Supabase y Netlify.
+      </p>
+      <a href="#main-header" class={styles.backToTop} aria-label="Volver arriba">
+        <span>Volver arriba</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,30 @@
+---
+interface Props {
+  as?: 'article' | 'div' | 'section' | 'li';
+  variant?: 'glass' | 'solid' | 'interactive' | 'highlight';
+  padding?: 'none' | 'sm' | 'md' | 'lg';
+  class?: string;
+  id?: string;
+}
+
+const {
+  as: Element = 'div',
+  variant = 'glass',
+  padding = 'md',
+  class: className = '',
+  id
+} = Astro.props;
+
+import styles from './Card.module.css';
+
+const classes = [
+  styles.card,
+  styles[`variant-${variant}`],
+  styles[`padding-${padding}`],
+  className
+].filter(Boolean).join(' ');
+---
+
+<Element class={classes} id={id}>
+  <slot />
+</Element>

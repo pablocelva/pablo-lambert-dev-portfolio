@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Services from '../components/sections/Services.astro';
+import ProjectsGallery from '../components/sections/ProjectsGallery.tsx';
+import ExperienceTimeline from '../components/sections/ExperienceTimeline.astro';
+import SkillsMatrix from '../components/sections/SkillsMatrix.astro';
+import Certifications from '../components/sections/Certifications.astro';
+import ContactSection from '../components/sections/ContactSection.tsx';
+import SectionHeader from '../components/common/SectionHeader.astro';
+
+import { PortfolioService } from '../lib/services/portfolio.service';
+
+const profile = await PortfolioService.getProfile();
+const services = await PortfolioService.getServices();
+const projects = await PortfolioService.getProjects();
+const experiences = await PortfolioService.getExperiences();
+const certifications = await PortfolioService.getCertifications();
+---
+
+<BaseLayout>
+  <!-- Hero Section -->
+  <Hero profile={profile} />
+
+  <!-- Services & Impact Areas Section -->
+  <Services services={services} />
+
+  <!-- Featured Projects Gallery (Interactive React Island) -->
+  <section class="projectsSection" id="proyectos" aria-label="Proyectos destacados de desarrollo e inteligencia artificial">
+    <div class="container">
+      <SectionHeader
+        badgeText="Portfolio de Ingeniería"
+        badgeVariant="primary"
+        title="Proyectos Destacados & Arquitecturas"
+        subtitle="Sistemas reales en producción con métricas medibles, código fuente auditable y arquitecturas diseñadas para escalar."
+      />
+      <ProjectsGallery client:visible initialProjects={projects} />
+    </div>
+  </section>
+
+  <!-- Work Experience Timeline -->
+  <ExperienceTimeline experiences={experiences} />
+
+  <!-- Skills & Competencies Matrix -->
+  <SkillsMatrix />
+
+  <!-- Certifications & Continuous Learning -->
+  <Certifications certifications={certifications} />
+
+  <!-- Interactive Contact Section (React Island) -->
+  <ContactSection
+    client:visible
+    email={profile.email}
+    linkedin={profile.linkedin}
+    github={profile.github}
+  />
+</BaseLayout>
+
+<style>
+  .projectsSection {
+    padding: 6rem 0;
+    position: relative;
+  }
+</style>

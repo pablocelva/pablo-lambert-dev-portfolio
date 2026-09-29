@@ -1,0 +1,103 @@
+---
+import type { Profile } from '../../lib/schemas/profile.schema';
+import Button from '../common/Button.astro';
+import styles from './Hero.module.css';
+
+interface Props {
+  profile: Profile;
+}
+
+const { profile } = Astro.props;
+---
+
+<section class={styles.hero} id="sobre-mi" aria-label="Introducción y perfil profesional">
+  <div class={`container ${styles.heroContainer}`}>
+    <div class={styles.content}>
+      <!-- Availability pill -->
+      <div class={styles.statusPill}>
+        <span class={styles.statusDot}></span>
+        <span>{profile.availability}</span>
+      </div>
+
+      <!-- Main Heading -->
+      <h1 class={styles.title}>
+        Ingeniería Full Stack & <span class={styles.gradientText}>Soluciones de IA</span> de Alto Impacto
+      </h1>
+
+      <!-- Subtitle -->
+      <p class={styles.subtitle}>
+        Hola, soy <strong class={styles.nameHighlight}>Pablo Lambert</strong>. Construyo plataformas web modernas, robustas y de alto rendimiento, uniendo arquitectura full stack con <span class={styles.aiTag}>IA Generativa (RAG)</span>, <span class={styles.dataTag}>Data Science</span> y <span class={styles.uxTag}>UX Accesible (WCAG AAA)</span>.
+      </p>
+
+      <!-- CTAs for Recruiters and Projects -->
+      <div class={styles.ctaGroup}>
+        <Button variant="primary" size="lg" href="#proyectos">
+          <span>Ver Proyectos Destacados</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </Button>
+
+        <button type="button" id="hero-recruiter-quick-btn" class={styles.recruiterBtn}>
+          <span class={styles.recruiterBtnIcon}>⚡</span>
+          <span>Resumen para Reclutadores</span>
+        </button>
+
+        <Button variant="outline" size="lg" href="#contacto">
+          Contactar
+        </Button>
+      </div>
+
+      <!-- Metrics / Highlights Grid -->
+      <div class={styles.metricsGrid}>
+        {profile.metrics.map((m) => (
+          <div class={styles.metricItem}>
+            <span class={styles.metricValue}>{m.value}</span>
+            <span class={styles.metricLabel}>{m.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Interactive Terminal / Code Architecture Showcase -->
+    <div class={styles.visualContainer} aria-hidden="true">
+      <div class={styles.terminalCard}>
+        <div class={styles.terminalHeader}>
+          <div class={styles.windowControls}>
+            <span class={`${styles.controlDot} ${styles.dotRed}`}></span>
+            <span class={`${styles.controlDot} ${styles.dotYellow}`}></span>
+            <span class={`${styles.controlDot} ${styles.dotGreen}`}></span>
+          </div>
+          <span class={styles.terminalTitle}>pablo-lambert.profile.ts</span>
+        </div>
+
+        <div class={styles.terminalBody}>
+          <pre class={styles.code}><code><span class={styles.codeKeyword}>const</span> <span class={styles.codeVar}>engineer</span> = &#123;
+  <span class={styles.codeProp}>name</span>: <span class={styles.codeString}>"Pablo Lambert"</span>,
+  <span class={styles.codeProp}>primaryRole</span>: <span class={styles.codeString}>"Senior Full Stack & AI Engineer"</span>,
+  <span class={styles.codeProp}>coreStack</span>: [<span class={styles.codeString}>"Astro"</span>, <span class={styles.codeString}>"TypeScript"</span>, <span class={styles.codeString}>"React"</span>, <span class={styles.codeString}>"Node.js"</span>, <span class={styles.codeString}>"Python"</span>],
+  <span class={styles.codeProp}>specializations</span>: &#123;
+    <span class={styles.codeProp}>ai</span>: <span class={styles.codeString}>"RAG Pipelines · LLM Agents · pgvector"</span>,
+    <span class={styles.codeProp}>data</span>: <span class={styles.codeString}>"DuckDB · ClickHouse · Analytics ETL"</span>,
+    <span class={styles.codeProp}>ux</span>: <span class={styles.codeString}>"Design Systems · WCAG AAA · a11y"</span>
+  &#125;,
+  <span class={styles.codeProp}>standards</span>: &#123;
+    <span class={styles.codeProp}>cleanCode</span>: <span class={styles.codeBool}>true</span>,
+    <span class={styles.codeProp}>testCoverage</span>: <span class={styles.codeString}>"&gt;90%"</span>,
+    <span class={styles.codeProp}>vitalsScore</span>: <span class={styles.codeNumber}>100</span>
+  &#125;,
+  <span class={styles.codeProp}>status</span>: <span class={styles.codeString}>"Ready for Impact 🚀"</span>
+&#125;;</code></pre>
+        </div>
+
+        <div class={styles.terminalFooter}>
+          <div class={styles.pulseIndicator}>
+            <span class={styles.pulseActive}></span>
+            <span>TypeScript 5.x · Node 24 · Production Ready</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,42 @@
+export const siteConfig = {
+  name: 'Pablo Lambert',
+  title: 'Pablo Lambert · Senior Full Stack Developer & AI Solutions Engineer',
+  description: 'Portafolio profesional de Pablo Lambert: Full Stack Developer con especialización transversal en IA Generativa, Data Science y UX Engineering. Explora proyectos destacados, experiencia, certificaciones y servicios técnicos.',
+  url: 'https://pablolambert-dev.netlify.app',
+  ogImage: '/og-image.png',
+  locale: 'es_ES',
+  author: 'Pablo Lambert',
+  twitterHandle: '@pablolambert_dev',
+  githubUrl: 'https://github.com/pablolambert-dev',
+  linkedinUrl: 'https://linkedin.com/in/pablolambert-dev',
+  email: 'pablo.lambert.dev@gmail.com',
+  keywords: [
+    'Pablo Lambert',
+    'Pablo Lambert Dev',
+    'Full Stack Developer',
+    'Senior Software Engineer',
+    'AI Solutions Engineer',
+    'Ingeniero de Software',
+    'Data Science',
+    'UX Engineer',
+    'Astro Developer',
+    'React Developer',
+    'TypeScript',
+    'Node.js',
+    'Python AI',
+    'LangChain',
+    'pgvector',
+    'Desarrollador Web Chile',
+    'Remote Full Stack Engineer',
+    'Consultor Tecnológico'
+  ],
+  navLinks: [
+    { label: 'Sobre mí', href: '#sobre-mi' },
+    { label: 'Servicios & Impacto', href: '#servicios' },
+    { label: 'Proyectos', href: '#proyectos' },
+    { label: 'Experiencia', href: '#experiencia' },
+    { label: 'Habilidades', href: '#habilidades' },
+    { label: 'Certificaciones', href: '#certificaciones' },
+    { label: 'Contacto', href: '#contacto' }
+  ]
+};

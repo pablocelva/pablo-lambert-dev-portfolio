@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/common/Button.astro';
+---
+
+<BaseLayout title="404 · Página no encontrada · Pablo Lambert">
+  <section style="min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 4rem 1.5rem;">
+    <div style="max-width: 500px; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
+      <span style="font-family: var(--font-mono); font-size: 5rem; font-weight: 800; color: var(--color-primary-light); line-height: 1;">404</span>
+      <h1 style="font-size: 1.75rem; margin: 0;">Página no encontrada</h1>
+      <p style="color: var(--text-secondary); margin: 0;">
+        La ruta solicitada no existe o ha sido movida. Puedes regresar a la página principal.
+      </p>
+      <Button variant="primary" size="md" href="/">
+        ← Volver al Inicio
+      </Button>
+    </div>
+  </section>
+</BaseLayout>

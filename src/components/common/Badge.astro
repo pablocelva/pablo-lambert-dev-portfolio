@@ -1,0 +1,26 @@
+---
+interface Props {
+  variant?: 'default' | 'primary' | 'ai' | 'data' | 'ux' | 'success' | 'warning' | 'outline';
+  size?: 'sm' | 'md';
+  class?: string;
+}
+
+const {
+  variant = 'default',
+  size = 'md',
+  class: className = ''
+} = Astro.props;
+
+import styles from './Badge.module.css';
+
+const classes = [
+  styles.badge,
+  styles[`variant-${variant}`],
+  styles[`size-${size}`],
+  className
+].filter(Boolean).join(' ');
+---
+
+<span class={classes}>
+  <slot />
+</span>

@@ -1,0 +1,59 @@
+---
+import type { Service } from '../../lib/schemas/service.schema';
+import SectionHeader from '../common/SectionHeader.astro';
+import Card from '../common/Card.astro';
+import Badge from '../common/Badge.astro';
+import styles from './Services.module.css';
+
+interface Props {
+  services: Service[];
+}
+
+const { services } = Astro.props;
+---
+
+<section class={styles.servicesSection} id="servicios" aria-label="Servicios y áreas de especialidad técnica">
+  <div class="container">
+    <SectionHeader
+      badgeText="Áreas de Impacto & Consultoría"
+      badgeVariant="primary"
+      title="¿Qué valor aporto a tu equipo o proyecto?"
+      subtitle="Combino solidez en ingeniería de software con pragmatismo en IA, analítica de datos y experiencia de usuario para resolver problemas reales de negocio."
+    />
+
+    <div class={styles.grid}>
+      {services.map((service) => (
+        <Card as="article" variant="interactive" padding="lg" class={styles.serviceCard}>
+          <div class={styles.cardHeader}>
+            <div class={styles.badgeRow}>
+              {service.badge && (
+                <Badge variant="primary" size="sm">
+                  {service.badge}
+                </Badge>
+              )}
+              <span class={styles.audience}>{service.targetAudience}</span>
+            </div>
+            <h3 class={styles.title}>{service.title}</h3>
+            <p class={styles.tagline}>{service.tagline}</p>
+          </div>
+
+          <p class={styles.description}>{service.description}</p>
+
+          <div class={styles.deliverables}>
+            <h4 class={styles.deliverablesTitle}>Entregables & Capacidades Clave:</h4>
+            <ul class={styles.deliverablesList}>
+              {service.deliverables.map((item) => (
+                <li class={styles.deliverableItem}>
+                  <svg class={styles.checkIcon} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Card>
+      ))}
+    </div>
+  </div>
+</section>

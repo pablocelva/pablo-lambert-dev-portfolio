@@ -1,0 +1,91 @@
+---
+import SectionHeader from '../common/SectionHeader.astro';
+import Card from '../common/Card.astro';
+import styles from './SkillsMatrix.module.css';
+
+const skillCategories = [
+  {
+    title: 'Full Stack & Web Core',
+    badge: 'Arquitectura',
+    colorClass: 'fullstack',
+    skills: [
+      { name: 'TypeScript / JavaScript (ESNext)', level: 'Experto' },
+      { name: 'Astro 5.x & React / Next.js', level: 'Experto' },
+      { name: 'Node.js & Express / Fastify / FastAPI', level: 'Avanzado' },
+      { name: 'PostgreSQL, Supabase & pgvector', level: 'Avanzado' },
+      { name: 'Zod & Clean Architecture / DDD', level: 'Experto' },
+      { name: 'REST APIs, GraphQL & WebSockets', level: 'Avanzado' }
+    ]
+  },
+  {
+    title: 'Inteligencia Artificial & LLMs',
+    badge: 'Especialidad',
+    colorClass: 'ai',
+    skills: [
+      { name: 'Arquitecturas RAG & Búsqueda Vectorial', level: 'Avanzado' },
+      { name: 'Orquestación de Agentes Autónomos', level: 'Avanzado' },
+      { name: 'LangChain, LlamaIndex & Vector DBs', level: 'Avanzado' },
+      { name: 'Integración APIs OpenAI, Claude & Gemini', level: 'Experto' },
+      { name: 'Prompt Engineering & Guardrails', level: 'Experto' },
+      { name: 'Fine-Tuning & Model Evaluation', level: 'Intermedio' }
+    ]
+  },
+  {
+    title: 'Data Science & Analytics',
+    badge: 'Analítica',
+    colorClass: 'data',
+    skills: [
+      { name: 'Python (Pandas, NumPy, Scikit-Learn)', level: 'Avanzado' },
+      { name: 'DuckDB, ClickHouse & In-Memory ETL', level: 'Avanzado' },
+      { name: 'Dashboards Analíticos (ECharts, D3)', level: 'Avanzado' },
+      { name: 'Modelos Predictivos & Clasificación', level: 'Avanzado' },
+      { name: 'Explicabilidad de Modelos (SHAP)', level: 'Intermedio' },
+      { name: 'Pipelines de Streaming & Batch', level: 'Avanzado' }
+    ]
+  },
+  {
+    title: 'UX, Frontend & Accesibilidad',
+    badge: 'Diseño de Producto',
+    colorClass: 'ux',
+    skills: [
+      { name: 'Design Systems & Figma Token Sync', level: 'Experto' },
+      { name: 'Accesibilidad Web (WCAG 2.2 AAA)', level: 'Experto' },
+      { name: 'CSS Modules, Tailwind & Styling Moderno', level: 'Experto' },
+      { name: 'Optimización Core Web Vitals (LCP, INP)', level: 'Experto' },
+      { name: 'Storybook & Component Testing', level: 'Avanzado' },
+      { name: 'Micro-interacciones & Motion accesible', level: 'Avanzado' }
+    ]
+  }
+];
+---
+
+<section class={styles.section} id="habilidades" aria-label="Habilidades técnicas y stack">
+  <div class="container">
+    <SectionHeader
+      badgeText="Habilidades & Stack"
+      badgeVariant="primary"
+      title="Matriz de Competencias Técnicas"
+      subtitle="Un stack transversal diseñado para resolver problemas de ingeniería complejos desde la base de datos hasta la interfaz del usuario."
+    />
+
+    <div class={styles.grid}>
+      {skillCategories.map((category) => (
+        <Card as="article" variant="glass" padding="lg" class={`${styles.card} ${styles[`card_${category.colorClass}`]}`}>
+          <div class={styles.header}>
+            <span class={styles.badge}>{category.badge}</span>
+            <h3 class={styles.title}>{category.title}</h3>
+          </div>
+
+          <ul class={styles.skillList}>
+            {category.skills.map((skill) => (
+              <li class={styles.skillItem}>
+                <span class={styles.skillName}>{skill.name}</span>
+                <span class={styles.skillLevel}>{skill.level}</span>
+              </li>
+            ))}
+          </ul>
+        </Card>
+      ))}
+    </div>
+  </div>
+</section>

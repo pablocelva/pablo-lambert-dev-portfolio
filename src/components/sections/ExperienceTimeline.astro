@@ -1,0 +1,78 @@
+---
+import type { Experience } from '../../lib/schemas/experience.schema';
+import SectionHeader from '../common/SectionHeader.astro';
+import Badge from '../common/Badge.astro';
+import styles from './ExperienceTimeline.module.css';
+
+interface Props {
+  experiences: Experience[];
+}
+
+const { experiences } = Astro.props;
+---
+
+<section class={styles.section} id="experiencia" aria-label="Trayectoria profesional y experiencia laboral">
+  <div class="container">
+    <SectionHeader
+      badgeText="Trayectoria Profesional"
+      badgeVariant="primary"
+      title="Experiencia Laboral & Liderazgo Técnico"
+      subtitle="Historial comprobado en diseño de sistemas, liderazgo de equipos de ingeniería, aceleración de entregas y optimización de métricas de producto."
+    />
+
+    <div class={styles.timeline}>
+      {experiences.map((exp) => (
+        <div class={styles.timelineItem}>
+          <div class={styles.timelineMarker}>
+            <div class={styles.markerDot}></div>
+            <div class={styles.markerLine}></div>
+          </div>
+
+          <article class={styles.timelineContent}>
+            <header class={styles.itemHeader}>
+              <div class={styles.roleCompany}>
+                <h3 class={styles.roleTitle}>{exp.role}</h3>
+                <div class={styles.companyRow}>
+                  {exp.companyUrl ? (
+                    <a href={exp.companyUrl} target="_blank" rel="noopener noreferrer" class={styles.companyLink}>
+                      {exp.company} ↗
+                    </a>
+                  ) : (
+                    <span class={styles.companyName}>{exp.company}</span>
+                  )}
+                  <span class={styles.separator}>•</span>
+                  <span class={styles.location}>{exp.location}</span>
+                </div>
+              </div>
+
+              <div class={styles.periodBadge}>
+                {exp.current && <Badge variant="success" size="sm">Actual</Badge>}
+                <Badge variant="default" size="sm">{exp.period}</Badge>
+              </div>
+            </header>
+
+            <p class={styles.description}>{exp.description}</p>
+
+            <div class={styles.achievements}>
+              <h4 class={styles.achievementsTitle}>Logros e Impacto Clave:</h4>
+              <ul class={styles.achievementsList}>
+                {exp.achievements.map((ach) => (
+                  <li class={styles.achievementItem}>
+                    <span class={styles.achievementBullet}>▹</span>
+                    <span>{ach}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <footer class={styles.techStack}>
+              {exp.tech.map((t) => (
+                <span class={styles.techBadge}>{t}</span>
+              ))}
+            </footer>
+          </article>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

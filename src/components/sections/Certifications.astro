@@ -1,0 +1,59 @@
+---
+import type { Certification } from '../../lib/schemas/certification.schema';
+import SectionHeader from '../common/SectionHeader.astro';
+import Card from '../common/Card.astro';
+import { formatCertificationCategory } from '../../lib/utils/formatters';
+import styles from './Certifications.module.css';
+
+interface Props {
+  certifications: Certification[];
+}
+
+const { certifications } = Astro.props;
+---
+
+<section class={styles.section} id="certificaciones" aria-label="Certificaciones y formación continua">
+  <div class="container">
+    <SectionHeader
+      badgeText="Certificaciones & Formación"
+      badgeVariant="primary"
+      title="Certificaciones Oficiales & Especializaciones"
+      subtitle="Validación rigurosa de competencias en arquitectura Cloud, Inteligencia Artificial, Ingeniería de Datos y Frontend."
+    />
+
+    <div class={styles.grid}>
+      {certifications.map((cert) => (
+        <Card as="article" variant="glass" padding="md" class={styles.certCard}>
+          <div class={styles.header}>
+            <span class={styles.categoryPill}>
+              {formatCertificationCategory(cert.category)}
+            </span>
+            <span class={styles.year}>{cert.issueDate}</span>
+          </div>
+
+          <h3 class={styles.title}>{cert.title}</h3>
+          <p class={styles.issuer}>{cert.issuer}</p>
+
+          <div class={styles.skills}>
+            {cert.skills.map((skill) => (
+              <span class={styles.skillTag}>{skill}</span>
+            ))}
+          </div>
+
+          {cert.credentialUrl && (
+            <div class={styles.footer}>
+              <a href={cert.credentialUrl} target="_blank" rel="noopener noreferrer" class={styles.verifyLink}>
+                <span>Verificar Credencial</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+            </div>
+          )}
+        </Card>
+      ))}
+    </div>
+  </div>
+</section>
